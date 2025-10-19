@@ -65,7 +65,7 @@ public class TestProjet {
         Femme oldest = femmes.stream().min((a, b) -> a.getDateNaissance().compareTo(b.getDateNaissance())).orElse(null);
         System.out.println("\nFemme la plus âgée : " + oldest.getNom() + " " + oldest.getPrenom());
 
-        // 6️⃣ Afficher les épouses d’un homme donné
+        // Afficher les épouses d’un homme donné
         System.out.println("\nÉpouses de SAID SAFI :");
         List<Mariage> epousesH1 = hommeService.getEpousesBetweenDates(h1.getId(),
                 LocalDate.of(1980,1,1), LocalDate.of(2025,12,31));
