@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Connexion MySQL -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/vente_db?createDatabaseIfNotExist=true</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password"></property>
+
+        <!-- Dialecte MySQL -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- Mise à jour automatique du schéma -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Affichage des requêtes SQL -->
+        <property name="show_sql">true</property>
+
+        <!-- Mapping des entités -->
+        <mapping class="ma.project.ex1.classes.Categorie"/>
+        <mapping class="ma.project.ex1.classes.Produit"/>
+        <mapping class="ma.project.ex1.classes.Commande"/>
+        <mapping class="ma.project.ex1.classes.LigneCommande"/>
+    </session-factory>
+</hibernate-configuration>
