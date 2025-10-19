@@ -68,7 +68,7 @@ public class HommeService implements IDao<Homme> {
         }
     }
 
-    // ✅ Méthode spécifique : afficher les épouses d’un homme entre deux dates
+    // Méthode spécifique : afficher les épouses d’un homme entre deux dates
     public List<Mariage> getEpousesBetweenDates(int hommeId, LocalDate d1, LocalDate d2) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             String hql = "FROM Mariage m WHERE m.homme.id = :id AND m.dateDebut BETWEEN :d1 AND :d2";
@@ -80,7 +80,7 @@ public class HommeService implements IDao<Homme> {
         }
     }
 
-    // dans FemmeService ou HommeService selon choix
+    // nbr des hommes marié a 3 femmes
     public Long countHommesMarriedToFourFemmes(LocalDate d1, LocalDate d2) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             CriteriaBuilder cb = session.getCriteriaBuilder();
@@ -88,33 +88,19 @@ public class HommeService implements IDao<Homme> {
             Root<Mariage> root = cq.from(Mariage.class);
             cq.select(cb.countDistinct(root.get("homme")))
                     .where(cb.between(root.get("dateDebut"), d1, d2));
-            // Ajouter HAVING count(femmes) = 4 si nécessaire
             return session.createQuery(cq).getSingleResult();
         }
     }
 
     public List<Homme> getHommesMarriedToFourFemmes(LocalDate d1, LocalDate d2) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            // Création du builder pour la requête
             CriteriaBuilder cb = session.getCriteriaBuilder();
             CriteriaQuery<Homme> cq = cb.createQuery(Homme.class);
-
-            // Racine principale : Mariage
             Root<Mariage> root = cq.from(Mariage.class);
-
-            // Jointure vers Homme
             Join<Mariage, Homme> hommeJoin = root.join("homme");
-
-            // Filtrer les mariages entre deux dates
             Predicate datePredicate = cb.between(root.get("dateDebut"), d1, d2);
-
-            // Grouper par homme
             cq.groupBy(hommeJoin.get("id"), hommeJoin.get("nom"), hommeJoin.get("prenom"));
-
-            // Garder seulement les hommes mariés à 4 femmes
             cq.having(cb.equal(cb.count(root.get("femme")), 4L));
-
-            // Sélectionner l’homme
             cq.select(hommeJoin).where(datePredicate);
 
             return session.createQuery(cq).getResultList();

@@ -57,7 +57,7 @@ public class ProduitService implements IDao<Produit> {
         return list;
     }
 
-    // 🔹 Afficher la liste des produits par catégorie
+    // Afficher la liste des produits par catégorie
     public List<Produit> getProduitsByCategorie(String nomCategorie) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<Produit> produits = session.createQuery(
@@ -68,7 +68,7 @@ public class ProduitService implements IDao<Produit> {
         return produits;
     }
 
-    // 🔹 Produits commandés entre deux dates
+    // Produits commandés entre deux dates
     public List<Produit> getProduitsCommandesEntreDates(Date date1, Date date2) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<Produit> produits = session.createQuery(
@@ -81,7 +81,7 @@ public class ProduitService implements IDao<Produit> {
         return produits;
     }
 
-    // 🔹 Produits d'une commande donnée
+    // Produits d'une commande donnée
     public List<LigneCommande> getProduitsByCommande(Long idCommande) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<LigneCommande> lignes = session.createQuery(
@@ -92,7 +92,7 @@ public class ProduitService implements IDao<Produit> {
         return lignes;
     }
 
-    // 🔹 Produits dont le prix > 100 (requête nommée)
+    // Produits dont le prix > 100 (requête nommée)
     public List<Produit> getProduitsPrixSuperieur100() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<Produit> produits = session.createNamedQuery("Produit.findPrixSuperieur100", Produit.class).list();

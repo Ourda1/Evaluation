@@ -16,7 +16,7 @@ public class TestProjet {
         HommeService hommeService = new HommeService();
         MariageService mariageService = new MariageService();
 
-        // 1️⃣ Création de 10 femmes
+        //  Création de 10 femmes
         Femme f1 = new Femme("SALIMA", "RAMI", LocalDate.of(1965, 3, 12));
         Femme f2 = new Femme("AMAL", "ALI", LocalDate.of(1970, 5, 20));
         Femme f3 = new Femme("WAFA", "ALAOUI", LocalDate.of(1975, 1, 15));
@@ -33,7 +33,7 @@ public class TestProjet {
         femmeService.create(f7); femmeService.create(f8); femmeService.create(f9);
         femmeService.create(f10);
 
-        // 2️⃣ Création de 5 hommes
+        //  Création de 5 hommes
         Homme h1 = new Homme("SAID", "SAFI", LocalDate.of(1960, 8, 15));
         Homme h2 = new Homme("MOHAMED", "RAHMI", LocalDate.of(1962, 9, 21));
         Homme h3 = new Homme("YASSIN", "ELHADI", LocalDate.of(1970, 3, 3));
@@ -43,7 +43,7 @@ public class TestProjet {
         hommeService.create(h1); hommeService.create(h2); hommeService.create(h3);
         hommeService.create(h4); hommeService.create(h5);
 
-        // 3️⃣ Création des mariages
+        //  Création des mariages
         mariageService.create(new Mariage(h1, f1, LocalDate.of(1990, 9, 3), null, 4));
         mariageService.create(new Mariage(h1, f2, LocalDate.of(1995, 9, 3), null, 2));
         mariageService.create(new Mariage(h1, f3, LocalDate.of(2000, 11, 4), null, 3));
@@ -56,12 +56,12 @@ public class TestProjet {
         mariageService.create(new Mariage(h2, f9, LocalDate.of(1990, 1, 5), null, 2));
         mariageService.create(new Mariage(h2, f10, LocalDate.of(1995, 5, 1), null, 1));
 
-        // 4️⃣ Afficher la liste des femmes
+        // Afficher la liste des femmes
         System.out.println("=== Liste des Femmes ===");
         List<Femme> femmes = femmeService.findAll();
         femmes.forEach(f -> System.out.println(f.getNom() + " " + f.getPrenom() + " - " + f.getDateNaissance()));
 
-        // 5️⃣ Afficher la femme la plus âgée
+        //  Afficher la femme la plus âgée
         Femme oldest = femmes.stream().min((a, b) -> a.getDateNaissance().compareTo(b.getDateNaissance())).orElse(null);
         System.out.println("\nFemme la plus âgée : " + oldest.getNom() + " " + oldest.getPrenom());
 
@@ -75,21 +75,21 @@ public class TestProjet {
                     " Date Début : " + m.getDateDebut() + " Nbr Enfants : " + m.getNbrEnfant());
         }
 
-        // 7️⃣ Nombre d'enfants d'une femme entre deux dates
+        //  Nombre d'enfants d'une femme entre deux dates
         Long nbEnfantsFemme = femmeService.getNbEnfantsBetween(f1.getId(), "1980-01-01", "2000-12-31");
         System.out.println("\nNombre d'enfants de " + f1.getNom() + " entre 1980 et 2000 : " + nbEnfantsFemme);
 
-        // 8️⃣ Femmes mariées deux fois ou plus
+        // Femmes mariées deux fois ou plus
         System.out.println("\nFemmes mariées au moins deux fois :");
         List<Femme> femmes2x = femmeService.getMarriedAtLeastTwice();
         femmes2x.forEach(f -> System.out.println(f.getNom() + " " + f.getPrenom()));
 
-        // 9️⃣ Hommes mariés à quatre femmes entre deux dates
+        //  Hommes mariés à quatre femmes entre deux dates
         Long nbHommes4Femmes = hommeService.countHommesMarriedToFourFemmes(
                 LocalDate.of(1980,1,1), LocalDate.of(2025,12,31));
         System.out.println("\nNombre d'hommes mariés à quatre femmes entre 1980 et 2025 : " + nbHommes4Femmes);
 
-        //
+        // nom des Hommes mariés à quatre femmes entre deux dates
         List<Homme> hommes4Femmes = hommeService.getHommesMarriedToFourFemmes(
                 LocalDate.of(1980, 1, 1),
                 LocalDate.of(2025, 12, 31)
@@ -105,7 +105,7 @@ public class TestProjet {
         }
 
 
-        // 🔟 Afficher les mariages d’un homme avec tous les détails
+        // Afficher les mariages d’un homme avec tous les détails
         System.out.println("\nMariages de SAID SAFI :");
         List<Mariage> mariagesH1 = mariageService.getMariagesOfHomme(h1.getId());
         int j = 1;

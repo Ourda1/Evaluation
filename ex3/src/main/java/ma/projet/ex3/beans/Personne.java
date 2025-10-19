@@ -7,7 +7,7 @@ import jakarta.persistence.MappedSuperclass;
 
 import java.time.LocalDate;
 
-@MappedSuperclass   // ou @Entity + @Inheritance si tu veux table par classe
+@MappedSuperclass
 public abstract class Personne {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
